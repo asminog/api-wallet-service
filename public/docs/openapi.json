@@ -1,0 +1,177 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Wallet API",
+        "description": "Server - User Wallet API",
+        "contact": {
+            "name": "Serg Akudovich",
+            "email": "serg@akudovich.com"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "/v1",
+            "description": "api server"
+        }
+    ],
+    "paths": {
+        "/balance/{id}": {
+            "get": {
+                "tags": [
+                    "balance"
+                ],
+                "summary": "Get wallet balance",
+                "operationId": "f8fe06f465c20141aa5ecbc4949393ff",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns Wallet object",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Wallet"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Wallet"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/balance/{id}/{type}/{reason}": {
+            "post": {
+                "tags": [
+                    "ballance"
+                ],
+                "summary": "Update wallet ballance",
+                "operationId": "28645d96d04d6009bf67ff8f70204944",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "debit",
+                                "credit"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "reason",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "stock",
+                                "refund"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Currency object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Money"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/balance/refund/7days": {
+            "get": {
+                "tags": [
+                    "ballance"
+                ],
+                "summary": "Gets refund weekly stat",
+                "operationId": "f069b063ee9ef8ab2c40b2dc4290e359",
+                "responses": {
+                    "200": {
+                        "description": "Query and it result"
+                    },
+                    "500": {
+                        "description": "Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Money": {
+                "properties": {
+                    "amount": {
+                        "description": "Ammount",
+                        "type": "number"
+                    },
+                    "currency": {
+                        "description": "Currency",
+                        "type": "string",
+                        "enum": [
+                            "USD",
+                            "RUB"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "Wallet": {
+                "properties": {
+                    "id": {
+                        "description": "Wallet ID",
+                        "type": "integer"
+                    },
+                    "balance": {
+                        "description": "Wallet Ballance",
+                        "type": "number"
+                    },
+                    "currency": {
+                        "description": "Wallet currency",
+                        "type": "string",
+                        "enum": [
+                            "USD",
+                            "RUB"
+                        ]
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

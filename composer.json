@@ -1,0 +1,37 @@
+{
+  "name": "akudovich/vigrom-api-test",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "akudovich",
+      "email": "serg@akudovich.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.0",
+    "ext-simplexml": "*",
+    "ext-libxml": "*"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "^2.1",
+    "zircote/swagger-php": "^4.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "api\\": "src/"
+    }
+  }
+}
